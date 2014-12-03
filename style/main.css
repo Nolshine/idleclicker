@@ -5,18 +5,19 @@
 	padding:1em;
 }
 .resource_display {
-	border: 1px solid #d0d0d0;
 	float:left;
+	border: 1px solid #d0d0d0;
 	background-color: #e0e0e0;
 	width:49.5%
 }
 .log_display {
-	border: 1px solid #d0d0d0;
 	float:right;
+	border: 1px solid #d0d0d0;
 	background-color: #e0e0e0;
 	width:49.5%
 }
 .action_display {
+	clear:both;
 	border: 1px solid #d0d0d0;
 	background-color: #f0f0f0;
 	height:40%;
