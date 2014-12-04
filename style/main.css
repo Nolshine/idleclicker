@@ -16,8 +16,10 @@
 	background-color: #e0e0e0;
 	width:49.5%
 }
-.action_display {
+.info_display:after{
 	clear:both;
+}
+.action_display {
 	border: 1px solid #d0d0d0;
 	background-color: #f0f0f0;
 	height:40%;
