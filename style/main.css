@@ -17,12 +17,14 @@
 	width:50%;
 }
 .resource_display {
+	position:relative;
 	border: 1px solid #d0d0d0;
 	background-color: #e0e0e0;
 	padding:0.5em;
 	height:12em;
 }
 .action_display {
+	position:relative;
 	border: 1px solid #d0d0d0;
 	border-top:none;
 	background-color: #f0f0f0;
@@ -30,10 +32,15 @@
 	height:20em;
 }
 .log_display {
+	position:relative;
 	border: 1px solid #d0d0d0;
 	background-color: #e0e0e0;
 	padding:0.5em;
 	height:33.05em;
+}
+.resource_col1, .resource_col2 {
+	position:relative;
+	width:auto;
 }
 /*.info_display:after{
 	clear:both;
