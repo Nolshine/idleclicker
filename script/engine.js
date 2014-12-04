@@ -1,3 +1,5 @@
+var logs = [];
+
 var clicks = 0;
 var autoclickers = 0;
 
@@ -6,7 +8,18 @@ var got_100_clicks = false;
 var got_autoclickers = false;
 
 var note = function (text) {
-	$(".log_display").append("<p>" + text + "</p>");
+	if (logs.length < 14) {
+		logs.splice(0, 0, text);
+	}
+	else {
+		logs.pop();
+		logs.splice(0, 0, text);
+	}
+
+	$(".log_display").html("");
+	for (var i = 0; i < logs.length; i++){
+		$(".log_display").append("<p>"+logs[i]+"</p>");
+	}
 }; // Eventually I'll use this to make sure there's only x lines ever in the log display.
 var update_resource = function (variable, id) {
 	$("#"+id).text(id+": "+variable);
@@ -20,20 +33,20 @@ $(document).ready(function () {
 	$("#buy_autoclicker").hide();
 
 	$("#click").click(function () {
-		clicks += 1;
+		clicks += 5;
 		update_resource(clicks, "clicks");
 		console.log(clicks);
 		
-		if (clicks === 1) {
+		if (clicks > 0) {
 			$("#clicks").show();
 		}
 
-		if (clicks === 11 && got_ten_clicks === false) {
+		if (clicks > 10 && got_ten_clicks === false) {
 			note("Surpassed ten clicks!");
 			got_ten_clicks = true;
 
 		}
-		else if (clicks === 100 && got_100_clicks === false){
+		else if (clicks > 99 && got_100_clicks === false){
 			got_100_clicks = true;
 			$("#buy_autoclicker").show();
 			note("Did you really just click 100 times in a shitty prototype?");
