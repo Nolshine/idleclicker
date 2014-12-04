@@ -1,17 +1,34 @@
 var logs = [];
 
+var mouse = {x: 0, y: 0};
+
+document.addEventListener('mousemove', function(e){ 
+    mouse.x = e.clientX || e.pageX; 
+    mouse.y = e.clientY || e.pageY 
+}, false);
+
 // This is a collection of elementID:flavourText pairs
 var tooltips = {
-	"#click":"Add to your cohesive click collection.",
-	"#buy_autoclicker":"Costs 100 clicks. +1 click/s."
+	"click":"Add to your cohesive click collection.",
+	"buy_autoclicker":"Costs 100 clicks. +1 click/s."
+};
+
+var hoverIn = function () {
+	$("#tooltip").css('top', mouse.y+1);
+	$("#tooltip").css('left', mouse.x+1);
+	$("#tooltip").text(tooltips[$(this).attr('id')])
+	$("#tooltip").show();
+};
+var hoverOut = function () {
+	$("#tooltip").hide();
+	$("#tooltip").text("");
 };
 
 // Will store all button functions here, will look cleaner.
 var button_actions = {
 	"click": function () {
 		clicks += 5;
-		update_resource(clicks, "clicks");
-		console.log(clicks);
+		updateResource(clicks, "clicks");
 		
 		if (clicks > 0) {
 			$("#clicks").show();
@@ -36,15 +53,19 @@ var button_actions = {
 				got_autoclickers = true;
 				$("#autoclickers").show();
 			}
-			update_resource(clicks, "clicks");
-			update_resource(autoclickers, "autoclickers");
+			updateResource(clicks, "clicks");
+			updateResource(autoclickers, "autoclickers");
 			note("Someone is clicking for you, lazy bum!");
 		}
 		else {
 			note("I'm afraid you're too poor! Welcome to the club.");
 		}
 	}
-}
+};
+
+var clickHandler = function () {
+	button_actions[$(this).attr('id')]();
+};
 
 var clicks = 0;
 var autoclickers = 0;
@@ -68,7 +89,7 @@ var note = function (text) {
 	}
 }; // Eventually I'll use this to make sure there's only x lines ever in the log display. **DONE**
 
-var update_resource = function (variable, id) {
+var updateResource = function (variable, id) {
 	$("#"+id).text(id+": "+variable);
 };
 
@@ -76,20 +97,22 @@ var update_resource = function (variable, id) {
 
 $(document).ready(function () {
 	console.log("so jquery works..");
+	// hide tooltip element
+	$("#tooltip").hide();
+
+	// have a tooltip trigger for buttons
+	$('button').hover(hoverIn, hoverOut)
+
+	// hide resource counters and rates
 	$(".resource").hide();
 	$(".resource_rate").hide();
-	/*$("#buy_autoclicker").css("display", "none");*/
+
+	// hide mysterious buttons
 	$("#buy_autoclicker").hide();
 
-	$("#click").click(function () {
-		console.log($(this).attr('id'));
-		console.log("click");
-	});
-
-	$("#buy_autoclicker").click(function () {
-		console.log($(this).attr('id'));
-		console.log("click");
-	});
+	// button events
+	$("#click").click(clickHandler);
+	$("#buy_autoclicker").click(clickHandler);
 });
 
 //main 'loop' (ticker)
@@ -97,7 +120,7 @@ setInterval(function () {
 
 	clicks += autoclickers;
 
-	update_resource(clicks, "clicks");
-	update_resource(autoclickers, "autoclickers");
+	updateResource(clicks, "clicks");
+	updateResource(autoclickers, "autoclickers");
 
 }, 1000);
