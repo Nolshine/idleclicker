@@ -1,38 +1,14 @@
 var logs = [];
 
-var clicks = 0;
-var autoclickers = 0;
-
-var got_ten_clicks = false;
-var got_100_clicks = false;
-var got_autoclickers = false;
-
-var note = function (text) {
-	if (logs.length < 14) {
-		logs.splice(0, 0, text);
-	}
-	else {
-		logs.pop();
-		logs.splice(0, 0, text);
-	}
-
-	$(".log_display").html("");
-	for (var i = 0; i < logs.length; i++){
-		$(".log_display").append("<p>"+logs[i]+"</p>");
-	}
-}; // Eventually I'll use this to make sure there's only x lines ever in the log display.
-var update_resource = function (variable, id) {
-	$("#"+id).text(id+": "+variable);
+// This is a collection of elementID:flavourText pairs
+var tooltips = {
+	"#click":"Add to your cohesive click collection.",
+	"#buy_autoclicker":"Costs 100 clicks. +1 click/s."
 };
 
-$(document).ready(function () {
-	console.log("so jquery works..");
-	$(".resource").hide();
-	$(".resource_rate").hide();
-	/*$("#buy_autoclicker").css("display", "none");*/
-	$("#buy_autoclicker").hide();
-
-	$("#click").click(function () {
+// Will store all button functions here, will look cleaner.
+var button_actions = {
+	"click": function () {
 		clicks += 5;
 		update_resource(clicks, "clicks");
 		console.log(clicks);
@@ -51,9 +27,8 @@ $(document).ready(function () {
 			$("#buy_autoclicker").show();
 			note("Did you really just click 100 times in a shitty prototype?");
 		}
-	});
-
-	$("#buy_autoclicker").click(function () {
+	},
+	"buy_autoclicker": function () {
 		if (clicks > 99) {
 			clicks -= 100;
 			autoclickers += 1;
@@ -68,10 +43,61 @@ $(document).ready(function () {
 		else {
 			note("I'm afraid you're too poor! Welcome to the club.");
 		}
+	}
+}
+
+var clicks = 0;
+var autoclickers = 0;
+
+var got_ten_clicks = false;
+var got_100_clicks = false;
+var got_autoclickers = false;
+
+var note = function (text) {
+	if (logs.length < 15) {
+		logs.splice(0, 0, text);
+	}
+	else {
+		logs.pop();
+		logs.splice(0, 0, text);
+	}
+
+	$(".log_display").html("");
+	for (var i = 0; i < logs.length; i++){
+		$(".log_display").append("<p>"+logs[i]+"</p>");
+	}
+}; // Eventually I'll use this to make sure there's only x lines ever in the log display. **DONE**
+
+var update_resource = function (variable, id) {
+	$("#"+id).text(id+": "+variable);
+};
+
+
+
+$(document).ready(function () {
+	console.log("so jquery works..");
+	$(".resource").hide();
+	$(".resource_rate").hide();
+	/*$("#buy_autoclicker").css("display", "none");*/
+	$("#buy_autoclicker").hide();
+
+	$("#click").click(function () {
+		console.log($(this).attr('id'));
+		console.log("click");
+	});
+
+	$("#buy_autoclicker").click(function () {
+		console.log($(this).attr('id'));
+		console.log("click");
 	});
 });
+
+//main 'loop' (ticker)
 setInterval(function () {
+
 	clicks += autoclickers;
+
 	update_resource(clicks, "clicks");
 	update_resource(autoclickers, "autoclickers");
+
 }, 1000);

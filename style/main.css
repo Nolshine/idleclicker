@@ -42,6 +42,13 @@
 	position:relative;
 	width:auto;
 }
+.tooltip {
+	position:absolute;
+	top:0px;
+	left:0px;
+	height:auto;
+	width:auto;
+}
 /*.info_display:after{
 	clear:both;
 }*/
