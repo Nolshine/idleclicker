@@ -14,8 +14,8 @@ var tooltips = {
 };
 
 var hoverIn = function () {
-	$("#tooltip").css('top', mouse.y+1);
-	$("#tooltip").css('left', mouse.x+1);
+	$("#tooltip").css('top', (mouse.y+10)+"px");
+	$("#tooltip").css('left', (mouse.x+10)+"px");
 	$("#tooltip").text(tooltips[$(this).attr('id')])
 	$("#tooltip").show();
 };
