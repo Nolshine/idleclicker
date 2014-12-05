@@ -37,11 +37,11 @@
 	padding:0.5em;
 }
 .log_display {
-	height:32em;
 	position:relative;
 	border: 1px solid #d0d0d0;
 	background-color: #eaeaea;
 	padding:0.5em;
+	overflow:hidden;
 }
 .resource_col1, .resource_col2 {
 	position:relative;
