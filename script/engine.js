@@ -14,14 +14,14 @@ var tooltips = {
 };
 
 var hoverIn = function () {
-	$("#tooltip").css('top', (mouse.y+10)+"px");
-	$("#tooltip").css('left', (mouse.x+10)+"px");
-	$("#tooltip").text(tooltips[$(this).attr('id')])
-	$("#tooltip").show();
+	$("#tooltip").text(tooltips[$(this).attr('id')]);
+	$("#tooltip").css('top', (mouse.y+15)+"px");
+	$("#tooltip").css('left', (mouse.x+15)+"px");
+	$("#tooltip").fadeIn(250);
 };
 var hoverOut = function () {
-	$("#tooltip").hide();
 	$("#tooltip").text("");
+	$("#tooltip").hide();
 };
 
 // Will store all button functions here, will look cleaner.
@@ -85,7 +85,8 @@ var note = function (text) {
 
 	$(".log_display").html("");
 	for (var i = 0; i < logs.length; i++){
-		$(".log_display").append("<p>"+logs[i]+"</p>");
+		var opacity = 1.0-(i*0.05);
+		$(".log_display").append("<p style=\"opacity:"+opacity+";\">"+logs[i]+"</p>");
 	}
 }; // Eventually I'll use this to make sure there's only x lines ever in the log display. **DONE**
 
