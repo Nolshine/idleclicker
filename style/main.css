@@ -28,6 +28,7 @@
 	border: 1px solid #d0d0d0;
 	background-color: #eaeaea;
 	padding:0.5em;
+	height:18em;
 }
 .action_display {
 	position:relative;
@@ -35,12 +36,14 @@
 	border-top:none;
 	background-color: #fafafa;
 	padding:0.5em;
+	height:9em;
 }
 .log_display {
 	position:relative;
 	border: 1px solid #d0d0d0;
 	background-color: #eaeaea;
 	padding:0.5em;
+	height:30.1em;
 	overflow:hidden;
 }
 .resource_col1, .resource_col2 {
